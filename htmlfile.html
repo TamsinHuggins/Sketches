@@ -1,0 +1,55 @@
+<html>
+  <body>
+    <canvas id="canvas" width="1000" height="500" style="color: green"></canvas>
+    <script>
+      const canvas = document.getElementById("canvas");
+      const ctx = canvas.getContext("2d");
+      ctx.fillStyle = "black";
+      ctx.fillRect(10, 10, 1000, 500);
+
+      // Set line width
+
+      ctx.lineWidth = 2;
+
+      // Wall
+      //ctx.strokeRect(75, 140, 150, 110);
+
+      // Door
+      //ctx.fillRect(130, 190, 40, 60);
+
+      // Roof
+
+      const sketch = (x, y, z, i, j, k, red) => {
+        ctx.lineWidth = k;
+        ctx.beginPath();
+        ctx.strokeStyle = `rgba(${red}, ${x}, ${y}, 0.3)`;
+        ctx.moveTo(350, 400);
+        ctx.lineTo(z + i, z - j + 200);
+        ctx.lineTo(z + i + j, z + i + 100);
+        ctx.lineTo(300 + i, j);
+        ctx.stroke();
+
+        //ctx.closePath();
+      };
+
+      for (let i = 100; i < 230; i = i + 3) {
+        for (let j = 10; j < 400; j = j + 40) {
+          sketch(j - 20, 2 * j, 150, i, j, i / 90 - 2, 270 - 0.8 * i);
+        }
+      }
+
+      ctx.strokeStyle = `rgb(180, 100, 100)`;
+      //ctx.moveTo(600, 600);
+      ctx.beginPath();
+
+      ctx.arc(601, 75, 60, 10, Math.PI, false);
+      ctx.moveTo(700, 75);
+
+      for (let i = 100; i < 140; i = i + 5) {
+        ctx.arc(i + 500, i, 60, 10, Math.PI, false);
+      }
+
+      ctx.stroke();
+    </script>
+  </body>
+</html>
