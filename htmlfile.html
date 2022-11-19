@@ -1,11 +1,11 @@
 <html>
   <body>
-    <canvas id="canvas" width="1000" height="500" style="color: green"></canvas>
+    <canvas id="canvas" width=700" height="700" style="color: green"></canvas>
     <script>
       const canvas = document.getElementById("canvas");
       const ctx = canvas.getContext("2d");
-      ctx.fillStyle = "black";
-      ctx.fillRect(10, 10, 1000, 500);
+      ctx.fillStyle = `rgb(3, 10, 20)`;
+      ctx.fillRect(10, 10, 700, 700);
 
       // Set line width
 
@@ -22,9 +22,20 @@
       const sketch = (x, y, z, i, j, k, red) => {
         ctx.lineWidth = k;
         ctx.beginPath();
-        ctx.strokeStyle = `rgba(${red}, ${x}, ${y}, 0.3)`;
-        ctx.moveTo(350, 400);
-        ctx.lineTo(z + i, z - j + 200);
+        ctx.strokeStyle = `rgba(${red}, ${x}, ${y - 10 }, 0.1)`;
+        ctx.moveTo(500, 350);
+        //ctx.quadraticCurveTo(z + i, z - j + 200, 2 * j, 0.01 * i * j);
+        ctx.lineTo(z + i + j, z + i + 100);
+        ctx.lineTo(300 + i, j);
+        ctx.stroke();
+      };
+
+      const darksketch = (x, y, z, i, j, k, red) => {
+        ctx.lineWidth = k;
+        ctx.beginPath();
+        ctx.strokeStyle = `rgba(${red}, ${x}, ${y}, 0.1)`;
+        ctx.moveTo(250, 353);
+        //ctx.quadraticCurveTo(z + i, z - j + 200, 2 * j, 0.01 * i * j);
         ctx.lineTo(z + i + j, z + i + 100);
         ctx.lineTo(300 + i, j);
         ctx.stroke();
@@ -32,23 +43,61 @@
         //ctx.closePath();
       };
 
+      // the swirl
       for (let i = 100; i < 230; i = i + 3) {
-        for (let j = 10; j < 400; j = j + 40) {
+        for (let j = 10; j < 300; j = j + 40) {
           sketch(j - 20, 2 * j, 150, i, j, i / 90 - 2, 270 - 0.8 * i);
         }
       }
 
-      ctx.strokeStyle = `rgb(180, 100, 100)`;
-      //ctx.moveTo(600, 600);
-      ctx.beginPath();
+      // for (let i = 10; i < 23; i = i + 2) {
+      //   for (let j = 1; j < 30; j = j + 20) {
+      //     sketch(j - 2, 2 * j, 15, i, j, i / 90 - 2, i);
+      //   }
+      // }
 
-      ctx.arc(601, 75, 60, 10, Math.PI, false);
-      ctx.moveTo(700, 75);
-
-      for (let i = 100; i < 140; i = i + 5) {
-        ctx.arc(i + 500, i, 60, 10, Math.PI, false);
+      for (let i = 10; i < 23; i++) {
+        for (let j = 1; j < 30; j++) {
+          darksketch(j - 2, 2 * j, 15, i, j, i / 90 - 2, i);
+        }
       }
 
+      ctx.strokeStyle = `rgb(200, 120, 100)`;
+      //ctx.moveTo(600, 600);
+      ctx.lineWidth = 4;
+      ctx.beginPath();
+      ctx.arc(305, 350, 70, Math.PI, 0, false);
+      ctx.stroke();
+
+      ctx.lineWidth = 0.1;
+      ctx.beginPath();
+      ctx.arc(150, 180, 10, 100, 0, true);
+      ctx.stroke();
+
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.arc(300, 350, 70, Math.PI, 0, false);
+      ctx.stroke();
+
+      ctx.lineWidth = 0.8;
+      ctx.beginPath();
+      ctx.arc(290, 350, 70, Math.PI, 0, false);
+      ctx.stroke();
+
+      ctx.lineWidth = 0.5;
+      ctx.beginPath();
+      ctx.arc(280, 350, 70, Math.PI, 0, false);
+      ctx.stroke();
+
+      ctx.beginPath();
+      ctx.strokeStyle = `rgba(20, 20, 90, 0.5)`;
+      ctx.lineWidth = 0.5;
+      ctx.arc(300, 349, 70, 0, Math.PI, false);
+      ctx.fillStyle = `rgba(20, 20, 90, 0.5)`;
+      ctx.fill();
+      ctx.stroke();
+
+      ctx.moveTo(700, 75);
       ctx.stroke();
     </script>
   </body>
